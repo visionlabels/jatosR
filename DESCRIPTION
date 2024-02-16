@@ -1,10 +1,13 @@
 Package: jatosR
-Title: What the Package Does (One Line, Title Case)
+Title: Downloading Data From JATOS Servers
 Version: 0.0.0.9000
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+    person(given = "Jiri",
+           family = "Lukavsky",
+           role = c("aut", "cre"),
+           email = "lukavsky@praha.psu.cas.cz",
+           comment = c(ORCID = "0000-0002-1082-229X"))
+Description: The package helps with downloading data from a JATOS server. The main goal is to provide functions for authentication and basic processing for getting data to R formats. The package provides a thin wrapper around JATOS API.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
