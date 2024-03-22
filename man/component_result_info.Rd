@@ -19,6 +19,7 @@ Parser of componentResults data
 demo <- prepare_demo(nofile = TRUE)
 json <- demo$meta |> httr2::resp_body_json()
 cr <- component_result_info(
-  json$data[[1]]$studyResults[[1]]$componentResults[[1]])
+  json$data[[1]]$studyResults[[1]]$componentResults[[1]]
+)
 cr
 }

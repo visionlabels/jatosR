@@ -27,10 +27,12 @@ define_connection <- function(url, token) {
   url <- stringr::str_remove(url, "/*$")
   # if only japXXX part provided, add "Bearer " at start
   if (stringr::str_starts(token, "jap")) {
-    token = stringr::str_c("Bearer ", token)
+    token <- stringr::str_c("Bearer ", token)
   }
-  stopifnot("Bad token format" =
-              stringr::str_starts(token, "Bearer jap"))
+  stopifnot(
+    "Bad token format" =
+      stringr::str_starts(token, "Bearer jap")
+  )
   list(url = url, token = token)
 }
 
@@ -124,10 +126,12 @@ get_metadata <- function(jc, batch_id = NULL, component_id = NULL) {
   req_base <- base_request(jc, "/jatos/api/v1/results/metadata")
   stopifnot(
     "Either batch_id or component_id must be provided" =
-      !(is.null(batch_id) && is.null(component_id)))
+      !(is.null(batch_id) && is.null(component_id))
+  )
   stopifnot(
     "Only one of batch_id or component_id must be provided" =
-      (is.null(batch_id) || is.null(component_id)))
+      (is.null(batch_id) || is.null(component_id))
+  )
   if (!is.null(batch_id)) {
     req_results <-
       req_base |>
@@ -173,10 +177,12 @@ get_results <- function(jc,
   req_base <- base_request(jc, "/jatos/api/v1/results/data")
   stopifnot(
     "Either batch_id or component_id must be provided" =
-      !(is.null(batch_id) && is.null(component_id)))
+      !(is.null(batch_id) && is.null(component_id))
+  )
   stopifnot(
     "Only one of batch_id or component_id must be provided" =
-      (is.null(batch_id) || is.null(component_id)))
+      (is.null(batch_id) || is.null(component_id))
+  )
   if (!is.null(batch_id)) {
     req_results <-
       req_base |>
@@ -191,7 +197,7 @@ get_results <- function(jc,
     folder <- dirname(filename)
     if (!dir.exists(folder)) dir.create(folder, recursive = TRUE)
   } else {
-    filename = tempfile()
+    filename <- tempfile()
   }
   resp_results <- req_results |> httr2::req_perform(path = filename)
   resp_results$batch_id <- batch_id
@@ -213,7 +219,8 @@ convert_date <- function(date_integer) {
   # Convert the Unix timestamp to a POSIXct date-time format
   date_time <-
     as.POSIXct(timestamp_in_seconds,
-               origin = "1970-01-01", tz = "UTC")
+      origin = "1970-01-01", tz = "UTC"
+    )
   # Convert the POSIXct date to a lubridate date
   lubridate::as_datetime(date_time)
 }
@@ -265,7 +272,8 @@ study_result_info <- function(sr) {
 #' demo <- prepare_demo(nofile = TRUE)
 #' json <- demo$meta |> httr2::resp_body_json()
 #' cr <- component_result_info(
-#'   json$data[[1]]$studyResults[[1]]$componentResults[[1]])
+#'   json$data[[1]]$studyResults[[1]]$componentResults[[1]]
+#' )
 #' cr
 component_result_info <- function(cr) {
   r <-
@@ -344,8 +352,10 @@ process_results <- function(meta, results,
   )
 
   # extract data files
-  stopifnot("File not included in the results" =
-              (class(results$body) == "httr2_path"))
+  stopifnot(
+    "File not included in the results" =
+      (class(results$body) == "httr2_path")
+  )
   zipfile <- results$body
   tmpfolder <- file.path(tempdir(), "zipped_data")
   utils::unzip(zipfile, exdir = tmpfolder)
