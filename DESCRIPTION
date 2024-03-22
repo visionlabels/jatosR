@@ -1,6 +1,6 @@
 Package: jatosR
 Title: Downloading Data From JATOS Servers
-Version: 0.0.0.9000
+Version: 0.1.0
 Authors@R: 
     person(given = "Jiri",
            family = "Lukavsky",
@@ -14,6 +14,14 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
 Imports: 
     dplyr,
-    purrr
+    httr2,
+    lubridate,
+    purrr,
+    readr,
+    stringr,
+    utils
 URL: https://github.com/visionlabels/jatosR
 BugReports: https://github.com/visionlabels/jatosR/issues
+Suggests: 
+    jsonlite,
+    jspsychread

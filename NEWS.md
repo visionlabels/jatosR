@@ -1,3 +1,3 @@
-# jatosR (development version)
+# jatosR 0.1.0
 
 * Initial CRAN submission.
