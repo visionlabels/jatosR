@@ -226,6 +226,10 @@ convert_date <- function(date_integer) {
 #' @export
 #'
 #' @examples
+#' demo <- prepare_demo(nofile = TRUE)
+#' json <- demo$meta |> httr2::resp_body_json()
+#' sr <- study_result_info(json$data[[1]]$studyResults[[1]])
+#' sr
 study_result_info <- function(sr) {
   r <-
     list(
@@ -258,6 +262,11 @@ study_result_info <- function(sr) {
 #' @export
 #'
 #' @examples
+#' demo <- prepare_demo(nofile = TRUE)
+#' json <- demo$meta |> httr2::resp_body_json()
+#' cr <- component_result_info(
+#'   json$data[[1]]$studyResults[[1]]$componentResults[[1]])
+#' cr
 component_result_info <- function(cr) {
   r <-
     list(
@@ -291,7 +300,7 @@ component_result_info <- function(cr) {
 #' @export
 #'
 #' @examples
-#' #' \dontrun{
+#' \dontrun{
 #' cc <- define_connection(
 #'   "https://www.myjatosinstance.org",
 #'   "Bearer jap_xXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXx"
@@ -358,4 +367,43 @@ process_results <- function(meta, results,
   unlink(tmpfolder, recursive = TRUE)
 
   res
+}
+
+#' Simple Response Time demo
+#'
+#' @param nofile Default `FALSE`. Use `TRUE` if you want to load only the metadata, without creating the local file.
+#'
+#' @return list with `meta` and `results`, which could be used in `process_results`. It also copies file `srt_demo.zip` in the working directory. After `process_results`, you can delete it, or use `clen_demo()`.
+#' @export
+#'
+#' @examples
+#' demo <- prepare_demo()
+#' r <- process_results(demo$meta, demo$results)
+#' r
+#' clean_demo()
+prepare_demo <- function(nofile = F) {
+  if (!nofile) {
+    file.copy(
+      system.file("extdata", "srtdemo.zip", package = "jatosR"),
+      getwd()
+    )
+  }
+  demo_srt
+}
+
+#' Demo clean up
+#'
+#' Cleans temporary file after `prepare_demo()`.
+#'
+#' @return Nothing
+#' @export
+#'
+#' @examples
+#' demo <- prepare_demo()
+#' r <- process_results(demo$meta, demo$results)
+#' r
+#' clean_demo()
+clean_demo <- function() {
+  fn <- file.path(getwd(), "srtdemo.zip")
+  if (file.exists(fn)) unlink(fn)
 }

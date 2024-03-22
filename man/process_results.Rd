@@ -18,10 +18,21 @@ process_results(meta, results, data_node = 1, component_node = 1)
 \value{
 list with
 \itemize{
-\item{"meta"}{General info like study ID or API version}
-\item{"data"}{Tibble with all meta data, column \code{raw} stores the results for each entry in text format. This can be parsed for example with \code{jsonlite} or \code{jspsychread} packages}
+\item{\code{meta}}{General info like study ID or API version}
+\item{\code{data}}{Tibble with all meta data, column \code{raw} stores the results for each entry in text format. This can be parsed for example with \code{jsonlite} or \code{jspsychread} packages}
 }
 }
 \description{
 Turns metadata and data into a single table
+}
+\examples{
+\dontrun{
+cc <- define_connection(
+  "https://www.myjatosinstance.org",
+  "Bearer jap_xXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXx"
+)
+meta <- get_metadata(cc, batch_id = 100)
+results <- get_results(cc, batch_id = 100)
+r <- process_results(meta, results)
+}
 }

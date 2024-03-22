@@ -2,11 +2,13 @@
 
 export(api_url)
 export(base_request)
+export(clean_demo)
 export(component_result_info)
 export(convert_date)
 export(define_connection)
 export(get_metadata)
 export(get_results)
+export(prepare_demo)
 export(process_results)
 export(study_result_info)
 export(test_connection)

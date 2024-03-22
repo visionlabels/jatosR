@@ -25,3 +25,6 @@ BugReports: https://github.com/visionlabels/jatosR/issues
 Suggests: 
     jsonlite,
     jspsychread
+Depends: 
+    R (>= 2.10)
+LazyData: true

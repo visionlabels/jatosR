@@ -15,3 +15,9 @@ List of size-one vectors, which could be converted to tibble if needed.
 \description{
 Parser of studyResults data
 }
+\examples{
+demo <- prepare_demo(nofile = TRUE)
+json <- demo$meta |> httr2::resp_body_json()
+sr <- study_result_info(json$data[[1]]$studyResults[[1]])
+sr
+}
