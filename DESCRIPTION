@@ -1,6 +1,6 @@
 Package: jatosR
 Title: Downloading Data From JATOS Servers
-Version: 0.1.0
+Version: 0.2.0
 Authors@R: 
     person(given = "Jiri",
            family = "Lukavsky",

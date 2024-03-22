@@ -39,6 +39,24 @@ meta <- get_metadata(cc, batch_id = 100)
 results <- get_results(cc, batch_id = 100)
 r <- process_results(meta, results)
 r$data
+```
+
+If you want to check the process with API token and living JATOS instance:
+
+``` r
+library(jatosR)
+
+# returns demo data and saves a copy of zipped data into working directory
+demo <- prepare_demo()
+r <- process_results(demo$meta, demo$results)
+r$data
+clean_demo() # cleans the local zipped data
 
 ```
 
+You can also check the final state by:
+
+``` r
+data("demo_srt_processed")
+
+```
