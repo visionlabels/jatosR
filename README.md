@@ -8,6 +8,9 @@ The goal of jatosR is to help with downloading data from [JATOS server](https://
 (for example from [MindProbe](https://mindprobe.eu/)). 
 The package provides a thin wrapper around [JATOS api](https://www.jatos.org/JATOS-API.html).
 
+The package simplifies the process by eliminating the need to download data manually. 
+This improves reproducibility, simplifies team collaboration and enables building of dashboards showing the progress of data collection.
+
 ## Installation
 
 The package is in active development. You can install the current version from [GitHub](https://github.com/visionlabels/jatosR) with following code:
