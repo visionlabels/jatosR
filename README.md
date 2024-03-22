@@ -57,6 +57,9 @@ clean_demo() # cleans the local zipped data
 You can also check the final state by:
 
 ``` r
+library(dplyr)
+library(jatosR)
+
 data("demo_srt_processed")
 
 ```
