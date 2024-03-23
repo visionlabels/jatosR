@@ -44,7 +44,7 @@ r <- process_results(meta, results)
 r$data
 ```
 
-If you want to check the process with API token and living JATOS instance:
+If you want to check the process without API token and living JATOS instance:
 
 ``` r
 library(jatosR)
