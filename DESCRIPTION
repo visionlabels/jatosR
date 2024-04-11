@@ -18,7 +18,9 @@ Imports:
     lubridate,
     purrr,
     readr,
+    rlang,
     stringr,
+    tibble,
     utils
 URL: https://github.com/visionlabels/jatosR
 BugReports: https://github.com/visionlabels/jatosR/issues
