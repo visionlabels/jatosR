@@ -22,7 +22,7 @@
 #' )
 #' test_connection(cc)
 #' }
-define_connection <- function(url, token) {
+define_connection <- function(url, token = Sys.getenv("JATOS_PAT")) {
   # remove trailing slash (all endpoints start with /)
   url <- stringr::str_remove(url, "/*$")
   # if only japXXX part provided, add "Bearer " at start
