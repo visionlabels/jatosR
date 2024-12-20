@@ -11,6 +11,9 @@ The package provides a thin wrapper around [JATOS api](https://www.jatos.org/JAT
 The package simplifies the process by eliminating the need to download data manually. 
 This improves reproducibility, simplifies team collaboration and enables building of dashboards showing the progress of data collection.
 
+If your JATOS experiment is based on [jsPsych](https://www.jspsych.org/) and you want to analyze the data within R,
+check also the sister package [jspsychread](https://github.com/visionlabels/jspsychread).
+
 ## Installation
 
 The package is in active development. You can install the current version from [GitHub](https://github.com/visionlabels/jatosR) with following code:
