@@ -10,7 +10,7 @@
 #' r <- process_results(demo$meta, demo$results)
 #' r
 #' clean_demo()
-prepare_demo <- function(nofile = F) {
+prepare_demo <- function(nofile = FALSE) {
   if (!nofile) {
     file.copy(
       system.file("extdata", "srtdemo.zip", package = "jatosR"),
