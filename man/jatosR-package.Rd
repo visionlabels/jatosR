@@ -19,5 +19,10 @@ Useful links:
 \author{
 \strong{Maintainer}: Jiri Lukavsky \email{lukavsky@praha.psu.cas.cz} (\href{https://orcid.org/0000-0002-1082-229X}{ORCID})
 
+Authors:
+\itemize{
+  \item Jiri Lukavsky \email{lukavsky@praha.psu.cas.cz} (\href{https://orcid.org/0000-0002-1082-229X}{ORCID})
+}
+
 }
 \keyword{internal}

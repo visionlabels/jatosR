@@ -1,3 +1,5 @@
+# jatosR 0.4.0
+
 # jatosR 0.3.0
 
 * Added tools for JSON and jspsych data processing
