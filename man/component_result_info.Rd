@@ -7,13 +7,21 @@
 component_result_info(cr)
 }
 \arguments{
-\item{cr}{list corresponding to the componentResults part of the data}
+\item{cr}{list corresponding to a single \code{componentResults} entry, e.g.
+\code{json$data[[1]]$studyResults[[1]]$componentResults[[1]]}}
 }
 \value{
-List of size-one vectors, which could be converted to tibble if needed.
+Named list of size-one vectors: \code{id_cr}, \code{component_id},
+\code{component_uuid}, \code{start_date_cr}, \code{end_date_cr}, \code{duration_cr}
+(computed as \code{end_date_cr - start_date_cr}), \code{component_state},
+\code{data_path}, \code{data_filename}, and \code{data_size}.
 }
 \description{
-Parser of componentResults data
+Extracts a fixed set of fields from a single \code{componentResults} entry (as
+parsed from JATOS JSON metadata) into a flat list. Missing fields fall
+back to a typed \code{NA}, so the result is always a list of size-one vectors
+that can be safely row-bound into a tibble, e.g. with \code{dplyr::bind_rows()}
+as done in \code{process_results}.
 }
 \examples{
 demo <- prepare_demo(nofile = TRUE)

@@ -1,14 +1,25 @@
 #' Turns metadata and data into a single table
 #'
+#' @details
+#' Combines the metadata returned by `get_metadata` with the raw data
+#' downloaded by `get_results`: the zip file referenced in `results$body` is
+#' unzipped into a temporary folder, `data.txt` for each study/component
+#' result is read into memory, and the temporary folder is removed again.
+#'
 #' @param meta Metadata from `get_metadata` function
-#' @param results Results from `get_results` function. It should link to an external file with zipped data.
-#' @param data_node Default 1. You can change it if more data nodes are present in your study.
-#' @param component_node Default 1. You can change it if more componentResults nodes are present in your study.
+#' @param results Results from `get_results` function. `results$body` must
+#'   be a path to a downloaded file (i.e. `get_results` was called with a
+#'   `filename`, or its default temporary file).
+#' @param data_node Index of the study data node to use. Defaults to `1`;
+#'   change it if more than one data node is present in `meta`.
+#' @param component_node Index of the componentResults node to use within
+#'   each study result. Defaults to `1`; change it if more than one
+#'   componentResults node is present in your study.
 #'
 #' @return list with
-#' \itemize{
+#' \describe{
 #'  \item{`meta`}{General info like study ID or API version}
-#'  \item{`data`}{Tibble with all meta data, column `raw` stores the results for each entry in text format. This can be parsed for example with `jsonlite` or `jspsychread` packages}
+#'  \item{`data`}{Tibble with all meta data, column `data_raw` stores the results for each entry in text format. This can be parsed for example with `jsonlite` or `jspsychread` packages}
 #' }
 #' @export
 #'
@@ -45,7 +56,7 @@ process_results <- function(meta, results, data_node = 1, component_node = 1) {
   comp <-
     dn$studyResults |>
     purrr::map(
-      \(x) component_result_info(x$componentResults[[1]]) |> dplyr::as_tibble()
+      \(x) component_result_info(x$componentResults[[component_node]]) |> dplyr::as_tibble()
     ) |>
     dplyr::bind_rows()
   stopifnot(nrow(comp) == minfo$study_results_node_count)

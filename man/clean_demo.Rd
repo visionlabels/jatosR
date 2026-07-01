@@ -7,10 +7,11 @@
 clean_demo()
 }
 \value{
-Nothing
+Invisibly \code{NULL}; called for its side effect.
 }
 \description{
-Cleans temporary file after \code{prepare_demo()}.
+Removes the \code{srtdemo.zip} file copied into the working directory by
+\code{prepare_demo()}. Does nothing if the file is not present.
 }
 \examples{
 demo <- prepare_demo()

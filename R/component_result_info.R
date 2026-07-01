@@ -1,8 +1,18 @@
 #' Parser of componentResults data
 #'
-#' @param cr list corresponding to the componentResults part of the data
+#' Extracts a fixed set of fields from a single `componentResults` entry (as
+#' parsed from JATOS JSON metadata) into a flat list. Missing fields fall
+#' back to a typed `NA`, so the result is always a list of size-one vectors
+#' that can be safely row-bound into a tibble, e.g. with `dplyr::bind_rows()`
+#' as done in `process_results`.
 #'
-#' @return List of size-one vectors, which could be converted to tibble if needed.
+#' @param cr list corresponding to a single `componentResults` entry, e.g.
+#'   `json$data[[1]]$studyResults[[1]]$componentResults[[1]]`
+#'
+#' @return Named list of size-one vectors: `id_cr`, `component_id`,
+#'   `component_uuid`, `start_date_cr`, `end_date_cr`, `duration_cr`
+#'   (computed as `end_date_cr - start_date_cr`), `component_state`,
+#'   `data_path`, `data_filename`, and `data_size`.
 #' @export
 #'
 #' @examples

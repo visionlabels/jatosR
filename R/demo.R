@@ -1,8 +1,21 @@
+utils::globalVariables("demo_srt")
+
 #' Simple Response Time demo
 #'
-#' @param nofile Default `FALSE`. Use `TRUE` if you want to load only the metadata, without creating the local file.
+#' Loads the bundled `demo_srt` dataset, a canned copy of the `meta` and
+#' `results` responses `get_metadata`/`get_results` would return for the
+#' [Simple Reaction Time Task](https://www.jatos.org/Example-Studies) example
+#' study. No network connection is required.
 #'
-#' @return list with `meta` and `results`, which could be used in `process_results`. It also copies file `srt_demo.zip` in the working directory. After `process_results`, you can delete it, or use `clen_demo()`.
+#' @param nofile Default `FALSE`. Use `TRUE` if you only need `meta` (e.g. to
+#'   inspect fields with `study_result_info`/`component_result_info`) and
+#'   don't intend to call `process_results()`, which requires the zip file
+#'   copied to the working directory.
+#'
+#' @return List with `meta` and `results`, which can be passed to
+#'   `process_results`. Unless `nofile = TRUE`, this also copies the file
+#'   `srtdemo.zip` into the working directory, since `results$body` refers to
+#'   it by relative path; remove it afterwards with `clean_demo()`.
 #' @export
 #'
 #' @examples
@@ -22,9 +35,10 @@ prepare_demo <- function(nofile = FALSE) {
 
 #' Demo clean up
 #'
-#' Cleans temporary file after `prepare_demo()`.
+#' Removes the `srtdemo.zip` file copied into the working directory by
+#' `prepare_demo()`. Does nothing if the file is not present.
 #'
-#' @return Nothing
+#' @return Invisibly `NULL`; called for its side effect.
 #' @export
 #'
 #' @examples

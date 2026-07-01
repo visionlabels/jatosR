@@ -11,9 +11,12 @@
 #' with a list containing a tibble called `data`. In that case,
 #' it processes the `data` tibble, puts it back into the original list and returns it.
 #'
-#' @param d Tibble with data obtained with `process_results`
+#' @param d Tibble with data obtained with `process_results`, or a list
+#'   containing such a tibble in its `data` element. Errors if neither shape
+#'   is provided.
 #'
-#' @return Tibble with new list column `data_json` or a list with `data` tibble (see above)
+#' @return Tibble with new list column `data_json`, or the input list with
+#'   its `data` tibble replaced by the same (see Details)
 #' @export
 #'
 #' @examples

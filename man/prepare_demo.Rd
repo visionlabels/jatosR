@@ -4,16 +4,25 @@
 \alias{prepare_demo}
 \title{Simple Response Time demo}
 \usage{
-prepare_demo(nofile = F)
+prepare_demo(nofile = FALSE)
 }
 \arguments{
-\item{nofile}{Default \code{FALSE}. Use \code{TRUE} if you want to load only the metadata, without creating the local file.}
+\item{nofile}{Default \code{FALSE}. Use \code{TRUE} if you only need \code{meta} (e.g. to
+inspect fields with \code{study_result_info}/\code{component_result_info}) and
+don't intend to call \code{process_results()}, which requires the zip file
+copied to the working directory.}
 }
 \value{
-list with \code{meta} and \code{results}, which could be used in \code{process_results}. It also copies file \code{srt_demo.zip} in the working directory. After \code{process_results}, you can delete it, or use \code{clen_demo()}.
+List with \code{meta} and \code{results}, which can be passed to
+\code{process_results}. Unless \code{nofile = TRUE}, this also copies the file
+\code{srtdemo.zip} into the working directory, since \code{results$body} refers to
+it by relative path; remove it afterwards with \code{clean_demo()}.
 }
 \description{
-Simple Response Time demo
+Loads the bundled \code{demo_srt} dataset, a canned copy of the \code{meta} and
+\code{results} responses \code{get_metadata}/\code{get_results} would return for the
+\href{https://www.jatos.org/Example-Studies}{Simple Reaction Time Task} example
+study. No network connection is required.
 }
 \examples{
 demo <- prepare_demo()

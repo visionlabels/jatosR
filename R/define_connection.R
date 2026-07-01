@@ -1,8 +1,6 @@
 #' Define JATOS connection
 #'
-#' @param url Base URL to the JATOS instance (with no API endpoints)
-#' @param token API token obtained from JATOS instance
-#'
+#' @details
 #' Check https://www.jatos.org/JATOS-API.html#personal-access-tokens
 #' about the process of getting a token.
 #'
@@ -11,7 +9,13 @@
 #' of the token, but the token seems to be valid, because it starts
 #' with "jap", the "Bearer " part is added.
 #'
-#' @return A simple list with url and token values to be used in other functions
+#' @param url Base URL to the JATOS instance (with no API endpoints)
+#' @param token API token obtained from the JATOS instance. Defaults to the
+#'   `JATOS_PAT` environment variable (e.g. set in `.Renviron`).
+#'
+#' @return A simple list with `url` and `token` values, to be passed as `jc`
+#'   to other functions such as `test_connection`, `get_metadata`, and
+#'   `get_results`.
 #' @export
 #'
 #' @examples

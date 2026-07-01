@@ -13,7 +13,10 @@ test_connection(jc)
 HTTP response object returned by \code{httr2::req_perform()}
 }
 \description{
-Test JATOS connection
+Checks that the personal access token in \code{jc} is valid by calling the
+JATOS admin token endpoint. Use \code{httr2::resp_status()} on the result to
+verify a \code{200} response, or wrap the call in \code{tryCatch()} since
+\code{httr2::req_perform()} raises an error for HTTP error statuses.
 }
 \examples{
 \dontrun{

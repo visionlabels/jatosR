@@ -7,10 +7,13 @@
 raw_json(d)
 }
 \arguments{
-\item{d}{Tibble with data obtained with \code{process_results}}
+\item{d}{Tibble with data obtained with \code{process_results}, or a list
+containing such a tibble in its \code{data} element. Errors if neither shape
+is provided.}
 }
 \value{
-Tibble with new list column \code{data_json} or a list with \code{data} tibble (see above)
+Tibble with new list column \code{data_json}, or the input list with
+its \code{data} tibble replaced by the same (see Details)
 }
 \description{
 Takes raw results stored in \code{data_raw} and adds new column \code{data_json} containing data in lists created by \code{jsonlite} package.

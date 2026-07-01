@@ -5,12 +5,12 @@
 \alias{demo_srt_processed}
 \title{Simple Reaction Time Task data}
 \format{
-\subsection{\code{who}}{
+\subsection{\code{demo_srt_processed}}{
 
 A list with two items:
 \describe{
-\item{meta}{A list with metadata}
-\item{data}{A tibble with 4 rows and 26 columns. Raw data are in text format in the \code{raw} column.}
+\item{meta}{A list with metadata, as returned by \code{process_results}}
+\item{data}{A tibble with 4 rows and 26 columns. Raw data are in text format in the \code{data_raw} column.}
 }
 }
 }

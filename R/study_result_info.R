@@ -1,8 +1,19 @@
 #' Parser of studyResults data
 #'
-#' @param sr list corresponding to the studyResults part of the data
+#' Extracts a fixed set of fields from a single `studyResults` entry (as
+#' parsed from JATOS JSON metadata) into a flat list. Missing fields fall
+#' back to a typed `NA`, so the result is always a list of size-one vectors
+#' that can be safely row-bound into a tibble, e.g. with `dplyr::bind_rows()`
+#' as done in `process_results`.
 #'
-#' @return List of size-one vectors, which could be converted to tibble if needed.
+#' @param sr list corresponding to a single `studyResults` entry, e.g.
+#'   `json$data[[1]]$studyResults[[1]]`
+#'
+#' @return Named list of size-one vectors: `id_sr`, `uuid`, `study_code`,
+#'   `start_date_sr`, `end_date_sr`, `duration_sr` (computed as
+#'   `end_date_sr - start_date_sr`), `last_seen_date`, `study_state`,
+#'   `worker_id`, `worker_type`, `batch_id`, `batch_uuid`, `batch_title`,
+#'   `group_id`, and `component_results_node_count`.
 #' @export
 #'
 #' @examples
@@ -25,7 +36,7 @@ study_result_info <- function(sr) {
       worker_id = sr$workerId %||% NA_integer_,
       worker_type = sr$workerType %||% NA_character_,
       batch_id = sr$batchId %||% NA_integer_,
-      batch_uuid = sr$batchUuid %||% NA_integer_,
+      batch_uuid = sr$batchUuid %||% NA_character_,
       batch_title = sr$batchTitle %||% NA_character_,
       group_id = sr$groupId %||% NA_integer_,
       component_results_node_count = length(sr$componentResults)

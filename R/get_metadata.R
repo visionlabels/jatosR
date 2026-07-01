@@ -1,12 +1,19 @@
 #' Get metadata for JATOS results
 #'
+#' @details
+#' Exactly one of `batch_id` or `component_id` must be provided; the function
+#' errors if both or neither are given.
+#'
 #' @param jc JATOS connection info, e.g. from `define_connection`
-#' @param batch_id Integer identifier for a particular experiment batch
-#' @param component_id Integer identifier for a particular experiment component
+#' @param batch_id Integer identifier for a particular experiment batch.
+#'   Mutually exclusive with `component_id`.
+#' @param component_id Integer identifier for a particular experiment
+#'   component. Mutually exclusive with `batch_id`.
 #'
-#' Only one of batch_id or component_id should be provided.
-#'
-#' @return HTTP response object returned by `httr2::req_perform()`. The actual metadata are stored in the response `body` and can be analyzed with `process_results`. The provided `batch_id` and `component_id` are added to the response data.
+#' @return HTTP response object returned by `httr2::req_perform()`. The actual
+#'   metadata are stored in the response `body` and can be analyzed with
+#'   `process_results`. The provided `batch_id` and `component_id` are added
+#'   to the response object.
 #' @export
 #'
 #' @examples

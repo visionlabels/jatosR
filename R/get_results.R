@@ -1,11 +1,23 @@
 #' Get raw data for JATOS results
 #'
-#' @param jc JATOS connection info, e.g. from `define_connection`
-#' @param batch_id Integer identifier for a particular experiment batch
-#' @param component_id Integer identifier for a particular experiment component
-#' @param filename Optional name of the file where the data should be stored. If not provided, temporary file is created in system folder for temporary files
+#' @details
+#' Exactly one of `batch_id` or `component_id` must be provided; the function
+#' errors if both or neither are given.
 #'
-#' @return HTTP response object returned by `httr2::req_perform()`. The data are stored in the provided file and can be analyzed with `process_results`. The provided `batch_id` and `component_id` are added to the response data.
+#' @param jc JATOS connection info, e.g. from `define_connection`
+#' @param batch_id Integer identifier for a particular experiment batch.
+#'   Mutually exclusive with `component_id`.
+#' @param component_id Integer identifier for a particular experiment
+#'   component. Mutually exclusive with `batch_id`.
+#' @param filename Optional path to the file where the zipped data should be
+#'   stored; parent directories are created if needed. If not provided, a
+#'   temporary file is created in the system's temporary directory.
+#'
+#' @return HTTP response object returned by `httr2::req_perform()`. The
+#'   zipped data are written to `filename` (or the temporary file), whose
+#'   path is available in `body`, and can be analyzed with
+#'   `process_results`. The provided `batch_id` and `component_id` are added
+#'   to the response object.
 #' @export
 #'
 #' @examples

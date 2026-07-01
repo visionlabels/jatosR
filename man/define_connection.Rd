@@ -9,21 +9,25 @@ define_connection(url, token = Sys.getenv("JATOS_PAT"))
 \arguments{
 \item{url}{Base URL to the JATOS instance (with no API endpoints)}
 
-\item{token}{API token obtained from JATOS instance
-
+\item{token}{API token obtained from the JATOS instance. Defaults to the
+\code{JATOS_PAT} environment variable (e.g. set in \code{.Renviron}).}
+}
+\value{
+A simple list with \code{url} and \code{token} values, to be passed as \code{jc}
+to other functions such as \code{test_connection}, \code{get_metadata}, and
+\code{get_results}.
+}
+\description{
+Define JATOS connection
+}
+\details{
 Check https://www.jatos.org/JATOS-API.html#personal-access-tokens
 about the process of getting a token.
 
 You don't need to worry about trailing slash in URL
 (it is automatically removed). If you omit "Bearer " part
 of the token, but the token seems to be valid, because it starts
-with "jap", the "Bearer " part is added.}
-}
-\value{
-A simple list with url and token values to be used in other functions
-}
-\description{
-Define JATOS connection
+with "jap", the "Bearer " part is added.
 }
 \examples{
 \dontrun{

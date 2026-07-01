@@ -9,17 +9,29 @@ get_results(jc, batch_id = NULL, component_id = NULL, filename = NULL)
 \arguments{
 \item{jc}{JATOS connection info, e.g. from \code{define_connection}}
 
-\item{batch_id}{Integer identifier for a particular experiment batch}
+\item{batch_id}{Integer identifier for a particular experiment batch.
+Mutually exclusive with \code{component_id}.}
 
-\item{component_id}{Integer identifier for a particular experiment component}
+\item{component_id}{Integer identifier for a particular experiment
+component. Mutually exclusive with \code{batch_id}.}
 
-\item{filename}{Optional name of the file where the data should be stored. If not provided, temporary file is created in system folder for temporary files}
+\item{filename}{Optional path to the file where the zipped data should be
+stored; parent directories are created if needed. If not provided, a
+temporary file is created in the system's temporary directory.}
 }
 \value{
-HTTP response object returned by \code{httr2::req_perform()}. The data are stored in the provided file and can be analyzed with \code{process_results}. The provided \code{batch_id} and \code{component_id} are added to the response data.
+HTTP response object returned by \code{httr2::req_perform()}. The
+zipped data are written to \code{filename} (or the temporary file), whose
+path is available in \code{body}, and can be analyzed with
+\code{process_results}. The provided \code{batch_id} and \code{component_id} are added
+to the response object.
 }
 \description{
 Get raw data for JATOS results
+}
+\details{
+Exactly one of \code{batch_id} or \code{component_id} must be provided; the function
+errors if both or neither are given.
 }
 \examples{
 \dontrun{

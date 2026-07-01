@@ -11,9 +11,12 @@
 #' with a list containing a tibble called `data`. In that case,
 #' it processes the `data` tibble, puts it back into the original list and returns it.
 #'
-#' @param d Tibble with data obtained with `process_results`
+#' @param d Tibble with data obtained with `process_results`, or a list
+#'   containing such a tibble in its `data` element. Errors if neither shape
+#'   is provided.
 #'
-#' @return Tibble with new list column `data_jspsych` or a list with `data` tibble (see above)
+#' @return Tibble with new list column `data_jspsych`, or the input list with
+#'   its `data` tibble replaced by the same (see Details)
 #' @export
 #'
 #' @examples
@@ -23,8 +26,8 @@
 #'
 #' # working with tibbles
 #' rdata <- r$data |> raw_jspsych()
-#' rdata |> select(start_date_sr, data_json)
-#' rdata$data_json[[1]]
+#' rdata |> dplyr::select(start_date_sr, data_jspsych)
+#' rdata$data_jspsych[[1]]
 #'
 #' # shortcut for the results list also works
 #' r <- r |> raw_jspsych()
