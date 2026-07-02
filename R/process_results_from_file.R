@@ -24,46 +24,8 @@ process_results_from_file <- function(path) {
   tmpfolder <- file.path(tempdir(), "zipped_data")
   utils::unzip(path, exdir = tmpfolder)
   # the content was extracted to tmpfolder (directly, no other subfolder in between)
-  mj <- jsonlite::fromJSON(file.path(tmpfolder, "metadata.json"))
 
-  minfo <- list(
-    api_version = NA_character_,
-    # data_node_count = length(mj$data),
-    study_id = mj$data$studyId,
-    study_uuid = mj$data$studyUuid,
-    study_title = mj$data$studyTitle,
-    study_results_node_count = nrow(mj$data$studyResults[[1]])
-  )
-
-  sres <-
-    mj$data$studyResults |>
-    dplyr::bind_rows() |>
-    dplyr::mutate(xid = .data$id) |>
-    tidyr::nest(.by = "xid") |>
-    dplyr::mutate(
-      study_results = purrr::map(
-        .data$data,
-        \(x) study_result_info(x) |> dplyr::as_tibble()
-      )
-    ) |>
-    dplyr::mutate(
-      component_results = purrr::map(.data$data, \(x) {
-        x$componentResults |>
-          purrr::map(\(x) {
-            component_result_info(x) |>
-              dplyr::as_tibble()
-          }) |>
-          dplyr::bind_rows()
-      })
-    )
-
-  res <- list(
-    meta = minfo,
-    data = sres |>
-      tidyr::unnest("study_results") |>
-      tidyr::unnest("component_results") |>
-      dplyr::select(-dplyr::all_of(c("xid", "data")))
-  )
+  res <- process_metadata_from_text(file.path(tmpfolder, "metadata.json"))
 
   # extract data files
   res$data <- res$data |> dplyr::mutate(data_raw = NA_character_)

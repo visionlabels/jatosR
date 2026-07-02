@@ -4,21 +4,13 @@
 \alias{process_results}
 \title{Turns metadata and data into a single table}
 \usage{
-process_results(meta, results, data_node = 1, component_node = 1)
+process_results(meta, results)
 }
 \arguments{
 \item{meta}{Metadata from \code{get_metadata} function}
 
-\item{results}{Results from \code{get_results} function. \code{results$body} must
-be a path to a downloaded file (i.e. \code{get_results} was called with a
-\code{filename}, or its default temporary file).}
-
-\item{data_node}{Index of the study data node to use. Defaults to \code{1};
-change it if more than one data node is present in \code{meta}.}
-
-\item{component_node}{Index of the componentResults node to use within
-each study result. Defaults to \code{1}; change it if more than one
-componentResults node is present in your study.}
+\item{results}{Results from \code{get_results} function, or \code{NULL} to process
+metadata only, leaving \code{data_raw} as \code{NA}.}
 }
 \value{
 list with
@@ -35,6 +27,11 @@ Combines the metadata returned by \code{get_metadata} with the raw data
 downloaded by \code{get_results}: the zip file referenced in \code{results$body} is
 unzipped into a temporary folder, \code{data.txt} for each study/component
 result is read into memory, and the temporary folder is removed again.
+
+If \code{results} is \code{NULL} or its \code{body} isn't a downloaded file (i.e.
+\code{get_results} wasn't called, or was called without a \code{filename}/default
+temporary file), a warning is issued and \code{data_raw} is left as \code{NA} for
+every row instead of erroring.
 }
 \examples{
 \dontrun{

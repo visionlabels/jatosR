@@ -6,15 +6,14 @@
 #' unzipped into a temporary folder, `data.txt` for each study/component
 #' result is read into memory, and the temporary folder is removed again.
 #'
+#' If `results` is `NULL` or its `body` isn't a downloaded file (i.e.
+#' `get_results` wasn't called, or was called without a `filename`/default
+#' temporary file), a warning is issued and `data_raw` is left as `NA` for
+#' every row instead of erroring.
+#'
 #' @param meta Metadata from `get_metadata` function
-#' @param results Results from `get_results` function. `results$body` must
-#'   be a path to a downloaded file (i.e. `get_results` was called with a
-#'   `filename`, or its default temporary file).
-#' @param data_node Index of the study data node to use. Defaults to `1`;
-#'   change it if more than one data node is present in `meta`.
-#' @param component_node Index of the componentResults node to use within
-#'   each study result. Defaults to `1`; change it if more than one
-#'   componentResults node is present in your study.
+#' @param results Results from `get_results` function, or `NULL` to process
+#'   metadata only, leaving `data_raw` as `NA`.
 #'
 #' @return list with
 #' \describe{
@@ -33,48 +32,21 @@
 #' results <- get_results(cc, batch_id = 100)
 #' r <- process_results(meta, results)
 #' }
-process_results <- function(meta, results, data_node = 1, component_node = 1) {
-  # metadata
-  mj <- meta |> httr2::resp_body_json()
-  dn <- mj$data[[data_node]]
-
-  minfo <- list(
-    api_version = mj$apiVersion,
-    data_node_count = length(mj$data),
-    study_id = dn$studyId,
-    study_uuid = dn$studyUuid,
-    study_title = dn$studyTitle,
-    study_results_node_count = length(dn$studyResults)
-  )
-
-  sres <-
-    dn$studyResults |>
-    purrr::map(\(x) study_result_info(x) |> dplyr::as_tibble()) |>
-    dplyr::bind_rows()
-  stopifnot(nrow(sres) == minfo$study_results_node_count)
-
-  comp <-
-    dn$studyResults |>
-    purrr::map(
-      \(x) component_result_info(x$componentResults[[component_node]]) |> dplyr::as_tibble()
-    ) |>
-    dplyr::bind_rows()
-  stopifnot(nrow(comp) == minfo$study_results_node_count)
-
-  res <- list(
-    meta = minfo,
-    data = dplyr::bind_cols(sres, comp)
-  )
+process_results <- function(meta, results) {
+  res <- process_metadata_from_text(meta |> httr2::resp_body_string())
 
   # extract data files
-  stopifnot(
-    "File not included in the results" = (class(results$body) == "httr2_path")
-  )
+  res$data <- res$data |> dplyr::mutate(data_raw = NA_character_)
+
+  if (is.null(results) || !isa(results$body, "httr2_path")) {
+    cli::cli_alert_warning("No results provided, data_raw will be set to NA's.")
+    return(res)
+  }
+
   zipfile <- results$body
   tmpfolder <- file.path(tempdir(), "zipped_data")
   utils::unzip(zipfile, exdir = tmpfolder)
 
-  res$data <- res$data |> dplyr::mutate(data_raw = NA_character_)
   for (i in 1:nrow(res$data)) {
     fn <- file.path(
       tmpfolder,

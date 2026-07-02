@@ -1,8 +1,6 @@
 demo <- prepare_demo(nofile = TRUE)
 json <- demo$meta |> httr2::resp_body_json()
 sr <- study_result_info(json$data[[1]]$studyResults[[1]])
-sr
-
 
 test_that("Study results as expected", {
   expect_equal(sr$id_sr, 442488)
