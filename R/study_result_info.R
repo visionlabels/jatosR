@@ -22,6 +22,8 @@
 #' sr <- study_result_info(json$data[[1]]$studyResults[[1]])
 #' sr
 study_result_info <- function(sr) {
+  # we expect only a single study result
+  stopifnot(length(sr$id) == 1)
   r <-
     list(
       id_sr = sr$id %||% NA_integer_,

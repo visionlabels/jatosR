@@ -11,20 +11,21 @@ Description: The package helps with downloading data from a JATOS server. The ma
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-Imports: 
+Imports:
     dplyr,
     httr2,
+    jsonlite,
     lubridate,
     purrr,
     readr,
     rlang,
     stringr,
     tibble,
+    tidyr,
     utils
 URL: https://github.com/visionlabels/jatosR
 BugReports: https://github.com/visionlabels/jatosR/issues
-Suggests: 
-    jsonlite,
+Suggests:
     jspsychread,
     testthat (>= 3.0.0)
 Depends: 

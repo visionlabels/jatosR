@@ -23,6 +23,7 @@
 #' )
 #' cr
 component_result_info <- function(cr) {
+  stopifnot(length(cr$id) == 1)
   r <-
     list(
       id_cr = cr$id %||% NA_integer_,
