@@ -24,7 +24,7 @@ Imports:
     tibble,
     tidyr,
     utils
-URL: https://github.com/visionlabels/jatosR
+URL: https://github.com/visionlabels/jatosR, https://visionlabels.github.io/jatosR/
 BugReports: https://github.com/visionlabels/jatosR/issues
 Suggests:
     jspsychread,
