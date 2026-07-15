@@ -22,6 +22,7 @@
 #' utils::unzip(fn, exdir = tmpfolder)
 #' r <- process_metadata_from_text(file.path(tmpfolder, "metadata.json"))
 #' r
+#' unlink(tmpfolder)
 process_metadata_from_text <- function(txt) {
   mj <- jsonlite::fromJSON(txt)
 
