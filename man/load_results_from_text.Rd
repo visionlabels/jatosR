@@ -44,14 +44,10 @@ study and component results in a tidy, relational format.
 }
 \examples{
 \dontrun{
-# Load results from JSON file
-json_text <- readLines("study_results.json") |> paste(collapse = "")
-results <- load_results_from_text(json_text)
-
-# Or from an API response
-response <- httr2::request("https://jatos.server/api/...") |>
-  httr2::req_perform()
-results <- load_results_from_text(httr2::resp_body_string(response))
+demo <- prepare_demo(nofile = TRUE)
+txt <- demo$meta |> httr2::resp_body_string()
+r1 <- load_results_from_text(txt)
+is_valid_result(r1)
 }
 
 }

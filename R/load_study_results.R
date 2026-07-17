@@ -40,8 +40,13 @@
 #'
 #' @examples
 #' \dontrun{
-#' # Load study results from JATOS JSON
-#' study_result <- load_study_results(raw_study_data)
+#' demo <- prepare_demo(nofile = TRUE)
+#' txt <- demo$meta |> httr2::resp_body_string()
+#' json <- jsonlite::fromJSON(txt, simplifyVector = FALSE)
+#' sr_data <- json$data[[1]]$studyResults
+#' r1 <- load_study_results(sr_data[[1]], parse_dates = TRUE)
+#' r2 <- load_study_results(sr_data[[1]], parse_dates = FALSE)
+#' is_valid_study_result(r1)
 #' }
 #'
 #' @export

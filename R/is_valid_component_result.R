@@ -26,8 +26,17 @@
 #' @examples
 #' \dontrun{
 #' # Validate a component result
-#' result <- load_component_results(component_data)
-#' is_valid_component_result(result)
+#' demo <- prepare_demo(nofile = TRUE)
+#' txt <- demo$meta |> httr2::resp_body_string()
+#' json <- jsonlite::fromJSON(txt, simplifyVector = FALSE)
+#' cr_data <- json$data[[1]]$studyResults[[1]]$componentResults
+#' r1 <- load_component_results(cr_data[[1]], parse_dates = TRUE)
+#' r2 <- load_component_results(cr_data[[1]], parse_dates = FALSE)
+#' is_valid_component_result(r1)
+#'
+#' # Show which checks fail
+#' r1$id <- NULL
+#' is_valid_component_result(r1, verbose = TRUE)
 #' }
 #'
 #' @export

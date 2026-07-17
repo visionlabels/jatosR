@@ -44,7 +44,13 @@ File data is processed separately via \code{\link[=load_files_results]{load_file
 \examples{
 \dontrun{
 # Load component results from JATOS JSON
-component_result <- load_component_results(raw_component_data)
+demo <- prepare_demo(nofile = TRUE)
+txt <- demo$meta |> httr2::resp_body_string()
+json <- jsonlite::fromJSON(txt, simplifyVector = FALSE)
+cr_data <- json$data[[1]]$studyResults[[1]]$componentResults
+r1 <- load_component_results(cr_data[[1]], parse_dates = TRUE)
+r2 <- load_component_results(cr_data[[1]], parse_dates = FALSE)
+is_valid_component_result(r1)
 }
 
 }

@@ -38,11 +38,14 @@ When \code{verbose = TRUE}, failed checks are reported via \code{cli::cli_alert_
 \examples{
 \dontrun{
 # Validate JATOS results
-results <- load_results_from_text(json_text)
-is_valid_result(results)
+demo <- prepare_demo(nofile = TRUE)
+txt <- demo$meta |> httr2::resp_body_string()
+r1 <- load_results_from_text(txt)
+is_valid_result(r1)
 
 # Show which checks fail
-is_valid_result(results, verbose = TRUE)
+r1$study_id <- "001"
+is_valid_result(r1, verbose = TRUE)
 }
 
 }
