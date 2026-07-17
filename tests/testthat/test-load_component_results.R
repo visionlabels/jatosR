@@ -45,19 +45,6 @@ test_that("Component results as expected", {
   expect_true(all(fcols %in% colnames(f1)))
 })
 
-test_that("Expected columns present", {
-  expect_true(all(ccols %in% colnames(r1)))
-  expect_true(all(ccols %in% colnames(r2)))
-  expect_true(is.numeric(r1[["id"]]))
-  expect_true(is.numeric(r1[["component_id"]]))
-  expect_true(is.character(r1[["component_uuid"]]))
-  expect_true(is.character(r1[["component_state"]]))
-  expect_true(is.character(r1[["path"]]))
-  expect_true(is.numeric(r1[["data_size"]]))
-  expect_true(is.character(r1[["data_size_human_readable"]]))
-  expect_true(is.numeric(r1[["is_quota_reached"]]))
-})
-
 test_that("Self-test is working", {
   expect_true(is_valid_component_result(r1))
   expect_true(is_valid_component_result(r2))

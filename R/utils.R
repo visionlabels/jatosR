@@ -62,6 +62,19 @@ convert_date <- function(date_integer) {
   lubridate::as_datetime(date_time)
 }
 
+#' Conditionally Convert Date from JATOS Integer Format
+#'
+#' Internal helper that converts JATOS date integers to POSIXct or returns
+#' the raw numeric value based on the `parse_date` flag.
+#'
+#' @param date_integer Numeric timestamp from JATOS (milliseconds since epoch),
+#'   or `NULL`.
+#' @param parse_date Logical. If `TRUE`, converts to POSIXct via [convert_date()].
+#'   If `FALSE`, returns the numeric value.
+#'
+#' @return POSIXct if `parse_date = TRUE`, numeric (or NA_integer_) if `FALSE`.
+#'
+#' @keywords internal
 convert_date_conditional <- function(date_integer, parse_date = TRUE) {
   di <- date_integer %||% NA_integer_
   if (parse_date) {
@@ -71,6 +84,19 @@ convert_date_conditional <- function(date_integer, parse_date = TRUE) {
   }
 }
 
+#' Conditionally Convert Duration from JATOS String Format
+#'
+#' Internal helper that converts JATOS duration strings to `Duration` objects
+#' or returns the raw character value based on the `parse_date` flag.
+#'
+#' @param dur Character duration string from JATOS (format: "HH:MM:SS"),
+#'   or `NULL`.
+#' @param parse_date Logical. If `TRUE`, parses via `lubridate::hms()` and
+#'   converts to `Duration`. If `FALSE`, returns the character value.
+#'
+#' @return `Duration` if `parse_date = TRUE`, character (or NA_character_) if `FALSE`.
+#'
+#' @keywords internal
 convert_duration_conditional <- function(dur, parse_date = TRUE) {
   dur <- dur %||% NA_character_
   if (parse_date) {

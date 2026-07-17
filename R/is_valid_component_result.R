@@ -4,7 +4,7 @@
 #' and data types as returned by [load_component_results()].
 #'
 #' @param cr A tibble representing a component result.
-#' @param verbose Prints a report of failed checks (default FALSE).
+#' @param verbose Prints a report of failed checks. Default is `FALSE`.
 #'
 #' @return A logical scalar: `TRUE` if all validation checks pass, `FALSE` otherwise.
 #'
