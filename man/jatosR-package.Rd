@@ -12,17 +12,13 @@ The package helps with downloading data from a JATOS server. The main goal is to
 Useful links:
 \itemize{
   \item \url{https://github.com/visionlabels/jatosR}
+  \item \url{https://visionlabels.github.io/jatosR/}
   \item Report bugs at \url{https://github.com/visionlabels/jatosR/issues}
 }
 
 }
 \author{
 \strong{Maintainer}: Jiri Lukavsky \email{jiri.lukavsky@ff.cuni.cz} (\href{https://orcid.org/0000-0002-1082-229X}{ORCID})
-
-Authors:
-\itemize{
-  \item Jiri Lukavsky \email{jiri.lukavsky@ff.cuni.cz} (\href{https://orcid.org/0000-0002-1082-229X}{ORCID})
-}
 
 }
 \keyword{internal}

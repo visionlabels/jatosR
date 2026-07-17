@@ -1,1 +1,1 @@
-is_valid_component_result <- function(sr) {}
+is_valid_study_result <- function(sr) {}

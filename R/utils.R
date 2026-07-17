@@ -61,3 +61,21 @@ convert_date <- function(date_integer) {
   # Convert the POSIXct date to a lubridate date
   lubridate::as_datetime(date_time)
 }
+
+convert_date_conditional <- function(date_integer, parse_date = TRUE) {
+  di <- date_integer %||% NA_integer_
+  if (parse_date) {
+    convert_date(di)
+  } else {
+    di
+  }
+}
+
+convert_duration_conditional <- function(dur, parse_date = TRUE) {
+  dur <- dur %||% NA_character_
+  if (parse_date) {
+    lubridate::hms(dur) |> lubridate::as.duration()
+  } else {
+    dur
+  }
+}
